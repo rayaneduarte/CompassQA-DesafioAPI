@@ -8,23 +8,23 @@ https://compassuol.serverest.dev
 
 ## Tecnologias
 
-* Python 3.14
+* Python 3.10+
 * Pytest
 * Requests
-* UUID
+* UUID (geração de e-mails únicos para os testes)
 
 ## Instalação
 
 Clone o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/rayaneduarte/CompassQA-DesafioAPI.git
 ```
 
 Acesse a pasta do projeto:
 
 ```bash
-cd desafio-serverest
+cd CompassQA-DesafioAPI
 ```
 
 Crie e ative o ambiente virtual:
@@ -56,7 +56,21 @@ Executar com logs detalhados:
 pytest -v -s
 ```
 
-## Cenários testados
+## Estrutura do Projeto
+
+```text
+CompassQA-DesafioAPI/
+│
+├── tests/
+│   └── test_usuarios.py
+│
+├── requirements.txt
+├── pytest.ini
+├── README.md
+└── .gitignore
+```
+
+## Cenários Testados
 
 ### Usuários
 
@@ -72,15 +86,16 @@ pytest -v -s
 * Atualizar usuário
 * Excluir usuário
 
-## Estratégia adotada
+## Estratégia Adotada
 
 * Testes independentes entre si
-* Utilização de e-mails dinâmicos para evitar conflitos
-* Validação de status codes
-* Validação da estrutura das respostas JSON
+* Utilização de UUID para geração de e-mails únicos, evitando conflitos entre execuções
+* Validação de status codes das respostas HTTP
+* Validação da estrutura dos dados retornados pela API
 * Cobertura de cenários positivos e negativos
+* Utilização de funções auxiliares para reduzir duplicação de código
 
-## Endpoints testados
+## Endpoints Testados
 
 ```http
 GET    /usuarios
@@ -90,9 +105,19 @@ PUT    /usuarios/{id}
 DELETE /usuarios/{id}
 ```
 
+## Validações Realizadas
+
+Os testes validam:
+
+* Status codes esperados para cada cenário
+* Estrutura das respostas JSON
+* Mensagens de sucesso e erro retornadas pela API
+* Integridade dos dados cadastrados e consultados
+* Comportamento esperado para dados inválidos ou inexistentes
+
 ## Resultados
 
-Projeto contendo 11 testes automatizados cobrindo os cenários mínimos solicitados no desafio.
+Projeto contendo 11 testes automatizados para o endpoint de usuários da API ServeRest, cobrindo os cenários mínimos propostos no desafio e cenários adicionais de validação.
 
 ## Autor
 
