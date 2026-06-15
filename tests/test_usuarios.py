@@ -1,20 +1,7 @@
-import uuid
-
 import pytest
 import requests
 
-BASE_URL = "https://compassuol.serverest.dev"
-
-def gerar_email():
-    return f"rayane_{uuid.uuid4().hex[:8]}@teste.com"
-
-def gerar_usuario():
-    return {
-        "nome": "Rayane QA",
-        "email": gerar_email(),
-        "password": "teste123",
-        "administrador": "true"
-    }
+from utils.helpers import BASE_URL, gerar_email, gerar_usuario
 
 @pytest.mark.usuarios
 def test_deve_listar_usuarios_com_sucesso():
