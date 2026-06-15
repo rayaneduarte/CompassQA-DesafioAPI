@@ -35,3 +35,11 @@ def obter_token_admin():
     response = requests.post(f"{BASE_URL}/login", json=payload)
     assert response.status_code == 200
     return response.json()["authorization"]
+
+def gerar_produto():
+    return {
+        "nome": f"Produto {uuid.uuid4().hex[:8]}",
+        "preco": 100,
+        "descricao": "Produto criado por automação",
+        "quantidade": 10
+    }
