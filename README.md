@@ -1,6 +1,6 @@
-# Desafio Semana 3 - Testes Automatizados de API (ServeRest)
+# Desafio Bootcamp - Testes Automatizados de API (ServeRest)
 
-Projeto desenvolvido para o desafio da Semana 3 utilizando Python, Pytest e Requests para automatizar testes do endpoint de usuários da API ServeRest.
+Projeto desenvolvido utilizando Python, Pytest e Requests para automatizar testes da API ServeRest, cobrindo os endpoints de Usuários, Login e Produtos.
 
 ## API utilizada
 
@@ -8,23 +8,24 @@ https://compassuol.serverest.dev
 
 ## Tecnologias
 
-* Python 3.10+
+* Python 3.14.5
 * Pytest
 * Requests
-* UUID (geração de e-mails únicos para os testes)
+* UUID
+* Git e GitHub
 
 ## Instalação
 
 Clone o repositório:
 
 ```bash
-git clone https://github.com/rayaneduarte/CompassQA-DesafioAPI.git
+git clone https://github.com/rayaneduarte/CompassQA.git
 ```
 
 Acesse a pasta do projeto:
 
 ```bash
-cd CompassQA-DesafioAPI
+cd CompassQA
 ```
 
 Crie e ative o ambiente virtual:
@@ -44,30 +45,83 @@ pip install -r requirements.txt
 
 ## Execução dos testes
 
-Executar todos os testes:
+Executar toda a suíte:
 
 ```bash
-pytest -v
+python -m pytest -v
 ```
 
 Executar com logs detalhados:
 
 ```bash
-pytest -v -s
+python -m pytest -v -s
+```
+
+Executar apenas os testes de usuários:
+
+```bash
+python -m pytest -m usuarios
+```
+
+Executar apenas os testes de login:
+
+```bash
+python -m pytest -m login
+```
+
+Executar apenas os testes de produtos:
+
+```bash
+python -m pytest -m produtos
 ```
 
 ## Estrutura do Projeto
 
 ```text
-CompassQA-DesafioAPI/
+CompassQA/
 │
 ├── tests/
-│   └── test_usuarios.py
+│   ├── conftest.py
+│   ├── test_usuarios.py
+│   ├── test_login.py
+│   └── test_produtos.py
 │
+├── utils/
+│   └── helpers.py
+│
+├── PLANO-DE-TESTES.md
 ├── requirements.txt
 ├── pytest.ini
 ├── README.md
 └── .gitignore
+```
+
+## Endpoints Testados
+
+### Usuários
+
+```http
+GET    /usuarios
+POST   /usuarios
+GET    /usuarios/{id}
+PUT    /usuarios/{id}
+DELETE /usuarios/{id}
+```
+
+### Login
+
+```http
+POST   /login
+```
+
+### Produtos
+
+```http
+GET    /produtos
+POST   /produtos
+GET    /produtos/{id}
+PUT    /produtos/{id}
+DELETE /produtos/{id}
 ```
 
 ## Cenários Testados
@@ -86,38 +140,94 @@ CompassQA-DesafioAPI/
 * Atualizar usuário
 * Excluir usuário
 
+### Login
+
+* Login com credenciais válidas
+* Login com senha incorreta
+* Login com e-mail inexistente
+* Login com e-mail vazio
+* Login com senha vazia
+* Login com campos vazios
+
+### Produtos
+
+* Listar produtos
+* Buscar produto por ID válido
+* Buscar produto inexistente
+* Cadastrar produto com administrador
+* Cadastrar produto sem token
+* Cadastrar produto com usuário comum
+* Cadastrar produto com dados inválidos
+* Atualizar produto existente
+* Excluir produto existente
+* Excluir produto inexistente
+
+### Cenários Adicionais
+
+* Buscar produto com ID inválido
+* Verificação de comportamento ao atualizar produto inexistente
+
 ## Estratégia Adotada
 
 * Testes independentes entre si
-* Utilização de UUID para geração de e-mails únicos, evitando conflitos entre execuções
-* Validação de status codes das respostas HTTP
-* Validação da estrutura dos dados retornados pela API
+* Uso de UUID para geração de dados dinâmicos
 * Cobertura de cenários positivos e negativos
-* Utilização de funções auxiliares para reduzir duplicação de código
+* Validação de status codes
+* Validação da estrutura das respostas JSON
+* Utilização de helpers para reutilização de código
+* Utilização de fixtures para autenticação e configuração compartilhada
 
-## Endpoints Testados
+## Cobertura de Testes
 
-```http
-GET    /usuarios
-POST   /usuarios
-GET    /usuarios/{id}
-PUT    /usuarios/{id}
-DELETE /usuarios/{id}
+### Método de Cálculo
+
+A cobertura foi calculada com base nos cenários definidos no Plano de Testes.
+
+Fórmula utilizada:
+
+```text
+Cobertura (%) = (Cenários Implementados / Cenários Planejados) × 100
 ```
 
-## Validações Realizadas
+### Resultado
 
-Os testes validam:
+| Endpoint | Planejados | Implementados | Cobertura |
+| -------- | ---------- | ------------- | --------- |
+| Usuários | 11         | 11            | 100%      |
+| Login    | 6          | 6             | 100%      |
+| Produtos | 10         | 10            | 100%      |
 
-* Status codes esperados para cada cenário
-* Estrutura das respostas JSON
-* Mensagens de sucesso e erro retornadas pela API
-* Integridade dos dados cadastrados e consultados
-* Comportamento esperado para dados inválidos ou inexistentes
+**Cobertura Total:** 27 de 27 cenários planejados implementados (**100%**)
 
-## Resultados
+### Testes Adicionais
 
-Projeto contendo 11 testes automatizados para o endpoint de usuários da API ServeRest, cobrindo os cenários mínimos propostos no desafio e cenários adicionais de validação.
+Além dos cenários previstos no Plano de Testes, foram implementados:
+
+* Busca de produto com ID inválido.
+* Investigação do comportamento de atualização de produto inexistente.
+
+**Total geral da suíte:** 29 testes automatizados.
+
+### Cenários Fora do Escopo
+
+* Testes de performance
+* Testes de carga
+* Testes de segurança
+* Testes de interface gráfica
+* Testes de acessibilidade
+* Integrações externas
+
+## Bug Report
+
+Durante a execução da suíte foi identificado um comportamento inesperado no endpoint:
+
+```http
+PUT /produtos/{id}
+```
+
+Quando um ID inexistente é informado, a API cria um novo produto ao invés de retornar uma mensagem informando que o produto não foi encontrado.
+
+O bug foi documentado na aba Issues do repositório: #2
 
 ## Autor
 

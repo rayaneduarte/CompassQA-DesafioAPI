@@ -63,7 +63,7 @@ def test_nao_deve_cadastrar_produto_sem_token():
 @pytest.mark.produtos
 def test_nao_deve_cadastrar_produto_com_usuario_comum():
     usuario = criar_usuario(administrador="false")
-    login = requests.post(
+    login = requests.post( 
         f"{BASE_URL}/login",
         json={
             "email": usuario["email"],
