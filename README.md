@@ -1,6 +1,6 @@
 # Desafio Bootcamp - Testes Automatizados de API (ServeRest)
 
-Projeto desenvolvido utilizando Python, Pytest e Requests para automatizar testes da API ServeRest, cobrindo os endpoints de Usuários, Login e Produtos.
+Projeto desenvolvido utilizando Python, Pytest e Requests para automatizar testes da API ServeRest, cobrindo os endpoints de Usuários, Login, Produtos e cenários adicionais para Carrinhos.
 
 ## API utilizada
 
@@ -77,6 +77,12 @@ Executar apenas os testes de produtos:
 python -m pytest -m produtos
 ```
 
+Executar apenas os testes de carrinhos:
+
+```bash
+python -m pytest -m carrinhos
+```
+
 ## Estrutura do Projeto
 
 ```text
@@ -86,7 +92,8 @@ CompassQA/
 │   ├── conftest.py
 │   ├── test_usuarios.py
 │   ├── test_login.py
-│   └── test_produtos.py
+│   ├── test_produtos.py
+│   └── test_carrinhos.py
 │
 ├── schemas/
 │   ├── usuario_schema.py
@@ -213,10 +220,22 @@ Cobertura (%) = (Cenários Implementados / Cenários Planejados) × 100
 Além dos cenários previstos no Plano de Testes, foram implementados:
 
 * Buscar usuário com ID inválido
-* Busca de produto com ID inválido.
-* Investigação do comportamento de atualização de produto inexistente.
+* Buscar produto com ID inválido
+* Investigação do comportamento de atualização de produto inexistente
+* Implementação de testes exploratórios para o endpoint de carrinhos
 
-**Total geral da suíte:** 30 testes automatizados.
+**Total geral da suíte:** 36 testes automatizados.
+
+### Carrinhos (Extra)
+
+Foram implementados testes exploratórios para o endpoint de carrinhos:
+
+* Listar carrinhos
+* Buscar carrinho por ID
+* Buscar carrinho inexistente
+* Buscar carrinho com ID inválido
+* Cadastrar carrinho com sucesso
+* Não permitir mais de um carrinho por usuário
 
 ### Cenários Fora do Escopo
 
