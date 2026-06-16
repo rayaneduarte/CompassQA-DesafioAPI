@@ -17,13 +17,13 @@ Garantir a qualidade e confiabilidade da API ServeRest através de testes automa
 - Atualização de usuários
 - Exclusão de usuários
 
-#### **Login** (Planejado)
+#### **Login** ✓ (Implementado)
 - Autenticação com credenciais válidas
 - Validação de senha incorreta
 - Validação de e-mail inexistente
 - Validação de campos obrigatórios
 
-#### **Produtos** (Planejado)
+#### **Produtos** ✓ (Implementado)
 - Listagem de produtos
 - Busca de produto por ID
 - Cadastro de produtos (com autorização)
@@ -46,7 +46,7 @@ Garantir a qualidade e confiabilidade da API ServeRest através de testes automa
 ### 3.1 Abordagem
 
 - **Testes Funcionais End-to-End**: Validação do comportamento completo dos endpoints
-- **Testes de Contrato**: Verificação da estrutura das respostas (status code, schema)
+- **Testes de Contrato**: Verificação de status codes e validação da estrutura das respostas utilizando JSON Schema
 - **Testes de Validação**: Verificação de regras de negócio e validações de entrada
 - **Testes de Cenários Negativos**: Validação de tratamento de erros e exceções
 
@@ -83,7 +83,7 @@ Garantir a qualidade e confiabilidade da API ServeRest através de testes automa
 
 ---
 
-### 4.2 Endpoint: Login (Status: Planejado)
+### 4.2 Endpoint: Login (Status: ✓ Implementado)
 
 | ID | Cenário | Entrada | Resultado Esperado | Prioridade |
 |----|---------|---------|-------------------|------------|
@@ -94,7 +94,7 @@ Garantir a qualidade e confiabilidade da API ServeRest através de testes automa
 | LG-05 | Login com campo senha vazio | E-mail válido, senha vazia | Status 400, mensagem de validação | Média |
 | LG-06 | Login com ambos os campos vazios | E-mail e senha vazios | Status 400, mensagem de validação | Média |
 
-**Cobertura planejada: 6 cenários**
+**Cobertura implementada: 6 cenários**
 
 **Critérios de Aceitação:**
 - Token JWT deve ser retornado em login bem-sucedido
@@ -103,7 +103,7 @@ Garantir a qualidade e confiabilidade da API ServeRest através de testes automa
 
 ---
 
-### 4.3 Endpoint: Produtos (Status: Planejado)
+### 4.3 Endpoint: Produtos (Status: ✓ Implementado)
 
 | ID | Cenário | Pré-condição | Resultado Esperado | Prioridade |
 |----|---------|--------------|-------------------|------------|
@@ -118,7 +118,7 @@ Garantir a qualidade e confiabilidade da API ServeRest através de testes automa
 | PR-09 | Excluir produto existente | Token de admin, produto existente | Status 200, produto excluído | Alta |
 | PR-10 | Excluir produto inexistente | Token de admin, ID inválido | Status 200, mensagem apropriada | Baixa |
 
-**Cobertura planejada: 10 cenários**
+**Cobertura implementada: 10 cenários**
 
 **Critérios de Aceitação:**
 - Apenas administradores podem cadastrar, atualizar e excluir produtos
@@ -156,11 +156,16 @@ Garantir a qualidade e confiabilidade da API ServeRest através de testes automa
 
 **Cobertura Atual:**
 - Usuários: 11/11 cenários (100%)
-- Login: 0/6 cenários (0%)
-- Produtos: 0/10 cenários (0%)
-- **Total: 11/27 cenários (40.7%)**
+- Login: 6/6 cenários (100%)
+- Produtos: 10/10 cenários (100%)
+- **Total: 27/27 cenários (100%)**
 
-**Cobertura Projetada após implementação:** 27/27 cenários (100%)
+**Cenários adicionais implementados:**
+- Busca de usuário com ID inválido
+- Busca de produto com ID inválido
+- Investigação do comportamento ao atualizar produto inexistente
+
+**Total geral da suíte:** 30 testes automatizados.
 
 ## 6. Critérios de Entrada e Saída
 
@@ -202,6 +207,7 @@ Os testes devem ser suspensos se:
 | Dependência entre testes | Baixa | Alto | Design de testes independentes, fixtures isoladas |
 | Timeout em requisições | Média | Médio | Configurar timeouts adequados, monitorar latência |
 | Token expirado durante execução | Baixa | Médio | Renovação automática de token, validação antes de uso |
+| Instabilidade da API externa (503 Service Unavailable) | Média | Médio | Reexecução da suíte e execução segmentada no CI |
 
 ## 8. Premissas e Dependências
 
@@ -221,6 +227,7 @@ Os testes devem ser suspensos se:
 - Requests
 - UUID (biblioteca padrão Python)
 - Git/GitHub para versionamento
+- jsonschema
 
 **Ambientais:**
 - API ServeRest disponível (URL base configurável)
@@ -250,15 +257,15 @@ Os testes devem ser suspensos se:
 - **Bugs Encontrados**: Número de defeitos identificados
 - **Severidade dos Bugs**: Crítico, Alto, Médio, Baixo
 
-## 11. Entregas
+## 10. Entregas
 
 - ✅ Suite de testes automatizados (código-fonte Python)
 - ✅ Arquivo `requirements.txt` com dependências
 - ✅ Documentação de execução (README)
-- 🔄 Relatórios de execução (Opcional)
-- 🔄 Integração com GitHub Actions (Opcional)
+- ✅ Integração Contínua com GitHub Actions
 - ✅ Plano de Testes (este documento)
-
+- ✅ Validação de respostas com JSON Schema
+- ✅ Bug Report documentado no GitHub Issues
 
 ---
 

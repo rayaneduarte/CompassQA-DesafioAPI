@@ -14,6 +14,7 @@ https://compassuol.serverest.dev
 * UUID
 * Git e GitHub
 * GitHub Actions
+* jsonschema
 
 ## Instalação
 
@@ -86,6 +87,11 @@ CompassQA/
 │   ├── test_usuarios.py
 │   ├── test_login.py
 │   └── test_produtos.py
+│
+├── schemas/
+│   ├── usuario_schema.py
+│   ├── login_schema.py
+│   └── produto_schema.py
 │
 ├── utils/
 │   └── helpers.py
@@ -165,6 +171,7 @@ DELETE /produtos/{id}
 
 ### Cenários Adicionais
 
+* Buscar usuário com ID inválido
 * Buscar produto com ID inválido
 * Verificação de comportamento ao atualizar produto inexistente
 
@@ -205,10 +212,11 @@ Cobertura (%) = (Cenários Implementados / Cenários Planejados) × 100
 
 Além dos cenários previstos no Plano de Testes, foram implementados:
 
+* Buscar usuário com ID inválido
 * Busca de produto com ID inválido.
 * Investigação do comportamento de atualização de produto inexistente.
 
-**Total geral da suíte:** 29 testes automatizados.
+**Total geral da suíte:** 30 testes automatizados.
 
 ### Cenários Fora do Escopo
 
@@ -234,6 +242,7 @@ O bug foi documentado na Issue #2 do repositório.
 ## Integração Contínua
 
 O projeto utiliza GitHub Actions para execução automática dos testes a cada push e pull request.
+A execução é realizada em etapas separadas para reduzir impactos de instabilidade da API utilizada nos testes.
 
 A pipeline realiza:
 
@@ -250,6 +259,7 @@ Foram implementadas validações de estrutura das respostas utilizando JSON Sche
 * GET /produtos
 
 As validações garantem que os contratos esperados da API sejam mantidos, verificando tipos de dados, campos obrigatórios e estrutura das respostas.
+Essa abordagem complementa as validações de status code e regras de negócio realizadas pelos testes funcionais.
 
 ## Autor
 

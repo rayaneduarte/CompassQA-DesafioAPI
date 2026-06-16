@@ -137,8 +137,11 @@ def test_deve_excluir_usuario_com_sucesso():
     assert body["message"] == "Registro excluído com sucesso"
 
 @pytest.mark.usuarios
-def test_debug_usuario_id_invalido():
-    response = requests.get(f"{BASE_URL}/usuarios/123456789")
-
-    print(response.status_code)
-    print(response.json())
+def test_deve_retornar_erro_ao_buscar_usuario_com_id_invalido():
+    usuario_id_invalido = "123456789"
+    response = requests.get(
+        f"{BASE_URL}/usuarios/{usuario_id_invalido}"
+    )
+    assert response.status_code == 400
+    body = response.json()
+    assert body["id"] == "id deve ter exatamente 16 caracteres alfanuméricos"
