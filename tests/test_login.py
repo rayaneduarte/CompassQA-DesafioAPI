@@ -1,6 +1,8 @@
 import pytest
 import requests
 from utils.helpers import BASE_URL, criar_usuario, gerar_email
+from jsonschema import validate
+from schemas.login_schema import LOGIN_SUCESSO_SCHEMA
 
 @pytest.mark.login
 def test_deve_realizar_login_com_sucesso():
@@ -15,6 +17,7 @@ def test_deve_realizar_login_com_sucesso():
     )
     assert response.status_code == 200
     body = response.json()
+    validate(instance=body, schema=LOGIN_SUCESSO_SCHEMA)
     assert body["message"] == "Login realizado com sucesso"
     assert "authorization" in body
 

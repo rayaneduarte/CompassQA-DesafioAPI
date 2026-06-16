@@ -1,13 +1,15 @@
 import pytest
 import requests
-
 from utils.helpers import BASE_URL, gerar_produto, criar_usuario
+from jsonschema import validate
+from schemas.produto_schema import LISTAR_PRODUTOS_SCHEMA, CADASTRAR_PRODUTO_SCHEMA
 
 @pytest.mark.produtos
 def test_deve_listar_produtos_com_sucesso():
     response = requests.get(f"{BASE_URL}/produtos")
     assert response.status_code == 200
     body = response.json()
+    validate(instance=body, schema=LISTAR_PRODUTOS_SCHEMA)
     assert "quantidade" in body
     assert "produtos" in body
     assert isinstance(body["produtos"], list)
@@ -46,6 +48,7 @@ def test_deve_cadastrar_produto_com_sucesso(admin_headers):
     )
     assert response.status_code == 201
     body = response.json()
+    validate(instance=body, schema=CADASTRAR_PRODUTO_SCHEMA)
     assert body["message"] == "Cadastro realizado com sucesso"
     assert "_id" in body
 

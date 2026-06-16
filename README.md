@@ -177,6 +177,7 @@ DELETE /produtos/{id}
 * Validação da estrutura das respostas JSON
 * Utilização de helpers para reutilização de código
 * Utilização de fixtures para autenticação e configuração compartilhada
+* Validação da estrutura das respostas utilizando JSON Schema
 
 ## Cobertura de Testes
 
@@ -239,6 +240,16 @@ A pipeline realiza:
 - Configuração do ambiente Python
 - Instalação das dependências
 - Execução automática da suíte de testes com Pytest
+
+## Validação de JSON Schema
+
+Foram implementadas validações de estrutura das respostas utilizando JSON Schema nos seguintes endpoints:
+
+* GET /usuarios
+* POST /login
+* GET /produtos
+
+As validações garantem que os contratos esperados da API sejam mantidos, verificando tipos de dados, campos obrigatórios e estrutura das respostas.
 
 ## Autor
 
