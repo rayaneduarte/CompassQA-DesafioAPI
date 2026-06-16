@@ -34,3 +34,5 @@ jobs:
           python -m pytest tests/test_produtos.py -v
           sleep 10
           python -m pytest tests/test_usuarios.py -v
+          sleep 10
+          python -m pytest tests/test_carrinhos.py -v
