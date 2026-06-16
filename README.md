@@ -13,6 +13,7 @@ https://compassuol.serverest.dev
 * Requests
 * UUID
 * Git e GitHub
+* GitHub Actions
 
 ## Instalação
 
@@ -227,7 +228,17 @@ PUT /produtos/{id}
 
 Quando um ID inexistente é informado, a API cria um novo produto ao invés de retornar uma mensagem informando que o produto não foi encontrado.
 
-O bug foi documentado na aba Issues do repositório: #2
+O bug foi documentado na Issue #2 do repositório.
+
+## Integração Contínua
+
+O projeto utiliza GitHub Actions para execução automática dos testes a cada push e pull request.
+
+A pipeline realiza:
+
+- Configuração do ambiente Python
+- Instalação das dependências
+- Execução automática da suíte de testes com Pytest
 
 ## Autor
 
