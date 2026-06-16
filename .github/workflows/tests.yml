@@ -29,4 +29,8 @@ jobs:
 
       - name: Executar testes
         run: |
-          python -m pytest -v
+          python -m pytest tests/test_login.py -v
+          sleep 10
+          python -m pytest tests/test_produtos.py -v
+          sleep 10
+          python -m pytest tests/test_usuarios.py -v
