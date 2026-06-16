@@ -21,13 +21,13 @@ https://compassuol.serverest.dev
 Clone o repositório:
 
 ```bash
-git clone https://github.com/rayaneduarte/CompassQA.git
+git clone https://github.com/rayaneduarte/CompassQA-DesafioAPI.git
 ```
 
 Acesse a pasta do projeto:
 
 ```bash
-cd CompassQA
+cd CompassQA-DesafioAPI
 ```
 
 Crie e ative o ambiente virtual:
